@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8" /> 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>   
     <title>Language App</title>
     <link href="./assets/css/app.css" rel="stylesheet" type="text/css"> 
     <script src="./assets/js/foundation.js"></script>
@@ -37,25 +37,54 @@
             float: right;
             background-color: rgba(244, 125, 106, 0.76);
         }
+        
+        .secondary.button:hover{
+            background: rgba(255, 131, 111, 0.38);
+        }
+        
+        #addword{
+            background: rgba(244, 125, 106, 0.66);
+        }
+        
+        #bmember{
+            box-shadow: -3px 0 5px rgba(244, 125, 106, 0.66);
+        }
     </style>
 </head>
 
 <body>
     <zf-offcanvas id="addword" position="bottom">
-        <a zf-close="addword" class="close-button">×</a>
-        <div class="small-12 medium-6 grid-content">
-            <label>
-                <br> </br>
-                Add a new word!
-                <span class="inline-label">
-                            <input type="text" name="word" placeholder="Type new word here">
-                            <input type="text" name="trans" placeholder="Type translation">
-                            <input type="text" name="otherInfo" placeholder="Type extra info">
-                        </span>
-            </label>
-        </div>
-
-    </zf-offcanvas>
+    <a zf-close="addword" class="close-button">×</a>
+    <div class="small-12 medium-6 grid-content">
+            <br></br>  
+<!--            Add a new word!-->
+            <form>
+                <div class="grid-block">
+                    <div class="small-12 medium-6 grid-content">
+                        <label>
+                            <input type="text" placeholder="Type new word here!">
+                        </label>
+                    </div>
+                    <div class="small-12 medium-6 grid-content">
+                        <label>
+                            <input type="text" placeholder="Type translation!">
+                        </label>
+                    </div>
+                    <div class="small-12 medium-6 grid-content">
+                        <label>
+                            <input type="text" placeholder="More info">
+                        </label>
+                    </div>
+                    <div class="small-12 medium-6 grid-content">
+                        <!--<label>Add also to My Words/Favorites</label>-->
+                        <input id="checkbox1" type="checkbox">
+                        <label for="checkbox1">Add also to My Words/Favorites</label>
+                        <a class="secondary button" href="#">Save</a>
+                    </div>
+                </div>
+            </form>
+    </div>
+</zf-offcanvas>
     <div class="grid-frame vertical">
         <div class="grid-content shrink" style="padding: 0;">
             <ul class="primary condense menu-bar" style="background-color: rgba(244, 125, 106, 0.01); ">
@@ -269,7 +298,7 @@
         </div>
         <div class="panel panel-right" ng-class="positionClass" zf-panel="bmember" id="bmember" position="right">
             <a zf-close="bmember" class="close-button ng-scope">×</a>
-            <p class="ng-scope">Become a member!</p>
+            <p class="ng-scope">Become a member!</p> <br>My Words <br><br>Forum
             <p class="ng-scope"></p>
         </div>
     </div>
