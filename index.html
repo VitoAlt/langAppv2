@@ -1,41 +1,45 @@
 <!doctype html>
 <html lang="en" ng-app="application">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />   
-    <title>Foundation for Apps</title>    
+
+<head>
+    <meta charset="utf-8" /> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>  
+    <title>Language App</title>
     <link href="./assets/css/app.css" rel="stylesheet" type="text/css">
     <script src="./assets/js/foundation.js"></script>
     <script src="./assets/js/templates.js"></script>
     <script src="./assets/js/routes.js"></script>
-    <script src="./assets/js/app.js"></script>    
+    <script src="./assets/js/app.js"></script>
     <link rel='stylesheet prefetch' href='http://owlgraphic.com/owlcarousel/owl-carousel/owl.carousel.css'>
-    <link href="./assets/css/style.css" rel="stylesheet" type="text/css"> 
+    <link href="./assets/css/style.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="./assets/css/responsive-tables.css">
+    <script src="./assets/js/responsive-tables.js"></script>
     <style>
         .menu-bar.primary > li > a:hover {
             background: rgba(244, 125, 106, 0.86);
         }
-
+        
         .grid-content.shrink {
             background-color: rgba(244, 125, 106, 0.76);
             text-align: center;
         }
-
+        
         .menu-bar.primary {
             display: inline-block;
         }
-
+        
         .menu-bar.primary > li {
             display: inline-block;
         }
-
+        
         .secondary.button {
             float: right;
             background-color: rgba(244, 125, 106, 0.76);
         }
     </style>
-  </head>
-  <body>
+</head>
+
+<body>
     <zf-offcanvas id="addword" position="bottom">
         <a zf-close="addword" class="close-button">×</a>
         <div class="small-12 medium-6 grid-content">
@@ -43,28 +47,29 @@
                 <br> </br>
                 Add a new word!
                 <span class="inline-label">
-                    <input type="text" name="word" placeholder="Type new word here">
-                    <input type="text" name="trans" placeholder="Type translation">
-                    <input type="text" name="otherInfo" placeholder="Type extra info">
-                </span>
+                            <input type="text" name="word" placeholder="Type new word here">
+                            <input type="text" name="trans" placeholder="Type translation">
+                            <input type="text" name="otherInfo" placeholder="Type extra info">
+                        </span>
             </label>
         </div>
 
     </zf-offcanvas>
     <div class="grid-frame vertical">
-      <div class="grid-content shrink" style="padding: 0;">        
+        <div class="grid-content shrink" style="padding: 0;">
             <ul class="primary condense menu-bar" style="background-color: rgba(244, 125, 106, 0.01); ">
                 <li><a onclick="azNot()" ui-sref="home"><strong><img zf-iconic="" icon="Home" size="medium" class="iconic-color-secondary"></strong></a></li>
-                <li><a id="a-z" onclick="azDisplay()"  ui-sref="abc"><strong>A - Z</strong></a></li>
+                <li><a id="a-z" onclick="azDisplay()" ui-sref="abc"><strong>A - Z</strong></a></li>
                 <li><a zf-open="addword" zf-close="bmember" zf-toggle="addword"><strong>Add Word</strong></a></li>
                 <li zf-open="bmember" zf-close="addword" zf-toggle="bmember"><a><strong>Member</strong></a></li>
-            </ul>   
-      </div>
-        
-      <a ui-sref="abc"></a>
-        <div id="wrapper-with-margin" class="wrapper-with-margin" style="display: none"> 
+            </ul>
+        </div>
+
+        <a ui-sref="abc"></a>
+        <div id="wrapper-with-margin" class="wrapper-with-margin" style="display: none">
+            <h6>Browse A - Z</h6>
             <div id="owl-demo" class="owl-carousel">
-                <div>a</div>
+                <div>a</div> 
 
                 <div>b</div>
 
@@ -104,7 +109,7 @@
 
                 <div>t</div>
 
-                <div>u</div>      
+                <div>u</div>
 
                 <div>v</div>
 
@@ -121,33 +126,169 @@
                 <div>ä</div>
 
                 <div>ö</div>
-            
-            <script>
-                console.log('hello');
-            </script>
+
+                <script>
+                    console.log('hello'); 
+                </script>
             </div>
-        </div> 
+        </div>
         
-      <div ui-view class="grid-content"></div>     
+        
+        <div id="wrapper-table" class="wrapper-with-margin" style="display: none">
+            <br>
+            <h6>Results</h6>
+            <hr>
+            <div id="table-results" class="table-results">
+                 <table class="responsive">
+                    <tbody><tr>
+                        <th>Header 1</th>
+                        <th>Header 2</th>
+                        <th>Header 3</th>
+                        <th>Header 4</th>
+                        <th>Header 5</th>
+        <!--
+                        <th>Header 6</th>
+                        <th>Header 7</th>
+                        <th>Header 8</th>
+        -->
+                        </tr>
+                        <tr>
+                        <td>row 1, cell 1</td>
+                        <td>row 1, cell 2</td>
+                        <td>row 1, cell 3</td>
+                        <td>row 1, cell 4</td>
+                        <td>row 1, cell 5</td>
+        <!--
+                        <td>row 1, cell 6</td>
+                        <td>row 1, cell 7</td>
+                        <td>row 1, cell 8</td>
+        -->
+                        </tr>
+                        <tr>
+                        <td>row 2, cell 1</td>
+                        <td>row 2, cell 2</td>
+                        <td>row 2, cell 3</td>
+                        <td>row 2, cell 4</td>
+                        <td>row 2, cell 5</td>
+        <!--
+                        <td>row 2, cell 6</td>
+                        <td>row 2, cell 7</td>
+                        <td>row 2, cell 8</td>
+        -->
+                        </tr>
+                        <tr>   
+                        <td>row 3, cell 1</td>
+                        <td>row 3, cell 2</td>
+                        <td>row 3, cell 3</td>
+                        <td>row 3, cell 4</td>
+                        <td>row 3, cell 5</td>
+        <!--
+                        <td>row 3, cell 6</td>
+                        <td>row 3, cell 7</td>
+                        <td>row 3, cell 8</td>
+        -->
+                        </tr>
+                        <tr>
+                        <td>row 4, cell 1</td>
+                        <td>row 4, cell 2</td>
+                        <td>row 4, cell 3</td>
+                        <td>row 4, cell 4</td>
+                        <td>row 4, cell 5</td>
+        <!--
+                        <td>row 4, cell 6</td>
+                        <td>row 4, cell 7</td>
+                        <td>row 4, cell 8</td>
+        -->
+                        </tr>
+                    </tbody>
+                </table>
+           </div>
+        </div>
+        
+        
+        <div ui-view class="grid-content">
+        
+<!--
+        <table class="responsive">
+            <tbody><tr>  
+                <th>Header 1</th>
+                <th>Header 2</th>
+                <th>Header 3</th>
+                <th>Header 4</th>
+                <th>Header 5</th>
+                <th>Header 6</th>
+                <th>Header 7</th>
+                <th>Header 8</th>
+                </tr>
+                <tr>
+                <td>row 1, cell 1</td>
+                <td>row 1, cell 2</td>
+                <td>row 1, cell 3</td>
+                <td>row 1, cell 4</td>
+                <td>row 1, cell 5</td>
+                <td>row 1, cell 6</td>
+                <td>row 1, cell 7</td>
+                <td>row 1, cell 8</td>
+                </tr>
+                <tr>
+                <td>row 2, cell 1</td>
+                <td>row 2, cell 2</td>
+                <td>row 2, cell 3</td>
+                <td>row 2, cell 4</td>
+                <td>row 2, cell 5</td>
+                <td>row 2, cell 6</td>
+                <td>row 2, cell 7</td>
+                <td>row 2, cell 8</td>
+                </tr>
+                <tr>
+                <td>row 3, cell 1</td>
+                <td>row 3, cell 2</td>
+                <td>row 3, cell 3</td>
+                <td>row 3, cell 4</td>
+                <td>row 3, cell 5</td>
+                <td>row 3, cell 6</td>
+                <td>row 3, cell 7</td>
+                <td>row 3, cell 8</td>
+                </tr>
+                <tr>
+                <td>row 4, cell 1</td>
+                <td>row 4, cell 2</td>
+                <td>row 4, cell 3</td>
+                <td>row 4, cell 4</td>
+                <td>row 4, cell 5</td>
+                <td>row 4, cell 6</td>
+                <td>row 4, cell 7</td>
+                <td>row 4, cell 8</td>
+                </tr>
+            </tbody>
+        </table>
+-->
+        </div>
         <div class="panel panel-right" ng-class="positionClass" zf-panel="bmember" id="bmember" position="right">
-            <a zf-close="bmember" class="close-button ng-scope">×</a> 
+            <a zf-close="bmember" class="close-button ng-scope">×</a>
             <p class="ng-scope">Become a member!</p>
             <p class="ng-scope"></p>
-        </div>        
+        </div>
     </div>
 
-  <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
-  <script src='http://owlgraphic.com/owlcarousel/owl-carousel/owl.carousel.min.js'></script>
-  <script src="./assets/js/extras.js"></script> 
-  <script>     
+    <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+    <script src='http://owlgraphic.com/owlcarousel/owl-carousel/owl.carousel.min.js'></script>
+    <script src="./assets/js/extras.js"></script>
+    <script>
         function azDisplay() {
             document.getElementById("wrapper-with-margin").style.display = "block";
+            document.getElementById("wrapper-table").style.display = "block";
             console.log("hi1");
         }
+
         function azNot() {
             document.getElementById("wrapper-with-margin").style.display = "none";
+            document.getElementById("wrapper-table").style.display = "none";
             console.log("hi1");
         }
-  </script>
-  </body>
+    </script>
+    <link href='http://cdn.datatables.net/1.10.10/css/jquery.dataTables.min.css' rel="stylesheet" type="text/css">
+    <script src='http://cdn.datatables.net/1.10.10/js/jquery.dataTables.min.js'></script>
+</body>
+
 </html>
