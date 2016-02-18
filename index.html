@@ -1,16 +1,19 @@
-<!doctype html>
 <html lang="en" ng-app="application">
 
 <head>
-    <meta charset="utf-8" /> 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>   
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/> 
     <title>Language App</title>
-    <link href="./assets/css/app.css" rel="stylesheet" type="text/css"> 
+    <link href="./assets/css/app.css" rel="stylesheet" type="text/css">
+    <link data-require="bootstrap-css@3.2.0" data-semver="3.2.0" rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" />
+    <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
     <script src="./assets/js/foundation.js"></script>
     <script src="./assets/js/templates.js"></script>
     <script src="./assets/js/routes.js"></script>
     <script src="./assets/js/app.js"></script>
-    <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+    <script src="./assets/js/script.js"></script>
+    <script src="./assets/js/lrDragNDrop.js"></script>
+    <script src="./assets/js/smart-table.debug.js"></script>
     <link rel='stylesheet prefetch' href='http://owlgraphic.com/owlcarousel/owl-carousel/owl.carousel.css'>
     <link href="./assets/css/style.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="./assets/css/responsive-tables.css">
@@ -38,26 +41,25 @@
             background-color: rgba(244, 125, 106, 0.76);
         }
         
-        .secondary.button:hover{
+        .secondary.button:hover {
             background: rgba(255, 131, 111, 0.38);
         }
         
-        #addword{
+        #addword {
             background: rgba(244, 125, 106, 0.66);
         }
         
-        #bmember{
+        #bmember {
             box-shadow: -3px 0 5px rgba(244, 125, 106, 0.66);
         }
     </style>
 </head>
 
-<body>
+<body ng-controller="mainCtrl">
     <zf-offcanvas id="addword" position="bottom">
-    <a zf-close="addword" class="close-button">×</a>
-    <div class="small-12 medium-6 grid-content">
-            <br></br>  
-<!--            Add a new word!-->
+        <a zf-close="addword" class="close-button">×</a>
+        <div class="small-12 medium-6 grid-content">
+            <br></br>
             <form>
                 <div class="grid-block">
                     <div class="small-12 medium-6 grid-content">
@@ -76,15 +78,14 @@
                         </label>
                     </div>
                     <div class="small-12 medium-6 grid-content">
-                        <!--<label>Add also to My Words/Favorites</label>-->
                         <input id="checkbox1" type="checkbox">
                         <label for="checkbox1">Add also to My Words/Favorites</label>
                         <a class="secondary button" href="#">Save</a>
                     </div>
                 </div>
             </form>
-    </div>
-</zf-offcanvas>
+        </div>
+    </zf-offcanvas>
     <div class="grid-frame vertical">
         <div class="grid-content shrink" style="padding: 0;">
             <ul class="primary condense menu-bar" style="background-color: rgba(244, 125, 106, 0.01); ">
@@ -94,216 +95,94 @@
                 <li zf-open="bmember" zf-close="addword" zf-toggle="bmember"><a><strong>Member</strong></a></li>
             </ul>
         </div>
-
         <a ui-sref="abc"></a>
-        <div id="wrapper-with-margin" class="wrapper-with-margin" style="display: none">
+        <div ng-controller="ChildController" id="wrapper-with-margin" class="wrapper-with-margin" style="display: none">
             <h6>Browse A - Z</h6>
             <div id="owl-demo" class="owl-carousel">
-                <div>a</div> 
-
-                <div>b</div>
-
-                <div>c</div>
-
-                <div>d</div>
-
-                <div>e</div>
-
+                <div><a title="a" ng-submit="submit()">a</a></div>
+                <div id="b" onClick="reply_click(this.id)" ng-model-options="{updateOn : 'this.id'}">b</div>
+                <div id="c" onClick="reply_click(this.id)">c</div>
+                <div id="d" onClick="reply_click(this.id)">d</div>
+                <div id="e" ng-click="setActiveLetter(this.id)" ng-class="{'btn-primary': this.id==activeLetter}">e</div>
                 <div>f</div>
-
                 <div>g</div>
-
                 <div>h</div>
-
                 <div>i</div>
-
                 <div>j</div>
-
                 <div>k</div>
-
                 <div>l</div>
-
                 <div>m</div>
-
                 <div>n</div>
-
                 <div>o</div>
-
                 <div>p</div>
-
                 <div>q</div>
-
                 <div>r</div>
-
                 <div>s</div>
-
                 <div>t</div>
-
                 <div>u</div>
-
                 <div>v</div>
-
                 <div>w</div>
-
                 <div>x</div>
-
                 <div>y</div>
-
                 <div>z</div>
-
                 <div>å</div>
-
                 <div>ä</div>
-
                 <div>ö</div>
-
                 <script>
-                    console.log('hello'); 
+                    console.log('hello');
                 </script>
             </div>
+            <div class="grid-container">
+                <div>
+                    <div class="table-container">
+                        <table st-table="rowCollection" class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th lr-drag-src="headers" lr-drop-target="headers" ng-repeat="col in columns" st-sort="{{col}}">{{col}}</th>
+                                </tr>
+                                <tr>
+                                    <th>
+                                        <input oninput="setGlobfield()" ng-model="search.english" placeholder="search for word" id="word-field" class="input-sm form-control" type="search" />
+                                    </th>
+                                    <th colspan="4">
+                                        <input st-search oninput="setWordfield()" placeholder="global search" ng-model="search.$" id="glob-field" class="input-sm form-control" type="search" />
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="row in read | filter:search:startWith">
+                                    <td>{{ row.english }}</td>
+                                    <td>{{ row.wordtype }}</td>
+                                    <td>{{ row.definition }}</td>
+                                    <td>{{ row.swedish }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div ng-show="isLoading" class="loading-indicator"></div>
+                </div>
+            </div>
         </div>
-        
-        
         <div id="wrapper-table" class="wrapper-with-margin" style="display: none">
             <br>
             <h6>Results</h6>
             <hr>
             <div class="twelve columns">
-            <div id="table-results" class="table-results">
-                 <table class="responsive">
-                    <tbody><tr>
-                        <th>Header 1</th>
-                        <th>Header 2</th>
-                        <th>Header 3</th>
-                        <th>Header 4</th>
-                        <th>Header 5</th>
-        <!--
-                        <th>Header 6</th>
-                        <th>Header 7</th>
-                        <th>Header 8</th>
-        -->
-                        </tr>
-                        <tr>
-                        <td>row 1, cell 1</td>
-                        <td>row 1, cell 2</td>
-                        <td>row 1, cell 3</td>
-                        <td>row 1, cell 4</td>
-                        <td>row 1, cell 5</td>
-        <!--
-                        <td>row 1, cell 6</td>
-                        <td>row 1, cell 7</td>
-                        <td>row 1, cell 8</td>
-        -->
-                        </tr>
-                        <tr>
-                        <td>row 2, cell 1</td>
-                        <td>row 2, cell 2</td>
-                        <td>row 2, cell 3</td>
-                        <td>row 2, cell 4</td>
-                        <td>row 2, cell 5</td>
-        <!--
-                        <td>row 2, cell 6</td>
-                        <td>row 2, cell 7</td>
-                        <td>row 2, cell 8</td>
-        -->
-                        </tr>
-                        <tr>   
-                        <td>row 3, cell 1</td>
-                        <td>row 3, cell 2</td>
-                        <td>row 3, cell 3</td>
-                        <td>row 3, cell 4</td>
-                        <td>row 3, cell 5</td>
-        <!--
-                        <td>row 3, cell 6</td>
-                        <td>row 3, cell 7</td>
-                        <td>row 3, cell 8</td>
-        -->
-                        </tr>
-                        <tr>
-                        <td>row 4, cell 1</td>
-                        <td>row 4, cell 2</td>
-                        <td>row 4, cell 3</td>
-                        <td>row 4, cell 4</td>
-                        <td>row 4, cell 5</td>
-        <!--
-                        <td>row 4, cell 6</td>
-                        <td>row 4, cell 7</td>
-                        <td>row 4, cell 8</td>
-        -->
-                        </tr>
-                    </tbody>
-                </table>
-           </div>
+                <div id="table-results" class="table-results">
+                </div>
+            </div>
         </div>
-        </div>
-        
-        
         <div ui-view class="grid-content">
-        
-<!--
-        <table class="responsive">
-            <tbody><tr>  
-                <th>Header 1</th>
-                <th>Header 2</th>
-                <th>Header 3</th>
-                <th>Header 4</th>
-                <th>Header 5</th>
-                <th>Header 6</th>
-                <th>Header 7</th>
-                <th>Header 8</th>
-                </tr>
-                <tr>
-                <td>row 1, cell 1</td>
-                <td>row 1, cell 2</td>
-                <td>row 1, cell 3</td>
-                <td>row 1, cell 4</td>
-                <td>row 1, cell 5</td>
-                <td>row 1, cell 6</td>
-                <td>row 1, cell 7</td>
-                <td>row 1, cell 8</td>
-                </tr>
-                <tr>
-                <td>row 2, cell 1</td>
-                <td>row 2, cell 2</td>
-                <td>row 2, cell 3</td>
-                <td>row 2, cell 4</td>
-                <td>row 2, cell 5</td>
-                <td>row 2, cell 6</td>
-                <td>row 2, cell 7</td>
-                <td>row 2, cell 8</td>
-                </tr>
-                <tr>
-                <td>row 3, cell 1</td>
-                <td>row 3, cell 2</td>
-                <td>row 3, cell 3</td>
-                <td>row 3, cell 4</td>
-                <td>row 3, cell 5</td>
-                <td>row 3, cell 6</td>
-                <td>row 3, cell 7</td>
-                <td>row 3, cell 8</td>
-                </tr>
-                <tr>
-                <td>row 4, cell 1</td>
-                <td>row 4, cell 2</td>
-                <td>row 4, cell 3</td>
-                <td>row 4, cell 4</td>
-                <td>row 4, cell 5</td>
-                <td>row 4, cell 6</td>
-                <td>row 4, cell 7</td>
-                <td>row 4, cell 8</td>
-                </tr>
-            </tbody>
-        </table>
--->
         </div>
         <div class="panel panel-right" ng-class="positionClass" zf-panel="bmember" id="bmember" position="right">
             <a zf-close="bmember" class="close-button ng-scope">×</a>
-            <p class="ng-scope">Become a member!</p> <br>My Words <br><br>Forum
+            <p class="ng-scope">Become a member!</p>
+            <br>My Words
+            <br>
+            <br>Forum
             <p class="ng-scope"></p>
         </div>
     </div>
-
-<!--    <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>-->
     <script src='http://owlgraphic.com/owlcarousel/owl-carousel/owl.carousel.min.js'></script>
     <script src="./assets/js/extras.js"></script>
     <script>
@@ -318,9 +197,29 @@
             document.getElementById("wrapper-table").style.display = "none";
             console.log("hi1");
         }
+
+        function setWordfield() {
+            $("#word-field").val(function () {
+                console.log('tst1');
+                return this.defaultValue;
+            });
+        }
+
+        function setGlobfield() {
+            $("#glob-field").val(function () {
+                console.log('tst2');
+                return this.defaultValue;
+            });
+        }
+
+        function reply_click(clicked_id) {
+            alert(clicked_id);
+        }
+
+        jQuery("a[title='a']").click(function () {
+            alert("a")
+        });
     </script>
-    <link href='http://cdn.datatables.net/1.10.10/css/jquery.dataTables.min.css' rel="stylesheet" type="text/css">
-    <script src='http://cdn.datatables.net/1.10.10/js/jquery.dataTables.min.js'></script>
 </body>
 
 </html>

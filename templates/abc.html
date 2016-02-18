@@ -1,3 +1,108 @@
+<div id="wrapper-with-margin" class="wrapper-with-margin" style="display: none">
+            <h6>Browse A - Z</h6>
+            <div id="owl-demo" class="owl-carousel">  
+                <div>a</div>
+                <div>b</div>
+                <div>c</div>
+                <div>d</div>
+                <div>e</div>
+                <div>f</div>
+                <div>g</div>
+                <div>h</div>
+                <div>i</div>
+                <div>j</div>
+                <div>k</div>
+                <div>l</div>
+                <div>m</div>
+                <div>n</div>
+                <div>o</div>
+                <div>p</div>
+                <div>q</div>
+                <div>r</div>
+                <div>s</div>
+                <div>t</div>
+                <div>u</div>
+                <div>v</div>
+                <div>w</div>
+                <div>x</div> 
+                <div>y</div>
+                <div>z</div>
+                <div>å</div>
+                <div>ä</div>
+                <div>ö</div>
+<!--
+                <script>
+                    console.log('hello from abc');
+                </script>
+-->
+            </div>
+    
+    
+    
+    
+    
+    <div ng-controller="mainCtrl"> 
+<div class="table-container">
+      <table st-table="rowCollection" class="table table-striped">
+	<thead>
+	<tr>
+		<th lr-drag-src="headers" lr-drop-target="headers" ng-repeat="col in columns" st-sort="{{col}}">{{col}}</th>
+	</tr>
+	<tr>
+		<th>
+			<input oninput="setGlobfield()" ng-model="search.english" placeholder="search for word" id="word-field"  class="input-sm form-control" type="search"/>
+		</th>
+		<th colspan="4">
+			<input st-search oninput="setWordfield()" placeholder="global search" ng-model="search.$" id="glob-field" class="input-sm form-control" type="search"/>
+		</th>
+	</tr>
+	</thead>
+	<tbody>
+<!--	<tr ng-repeat="row in rowCollection">-->
+        	<tr ng-repeat="row in read | filter:search:strict">
+<!--		<td ng-repeat="col in columns">{{row[col]}}</td>-->
+        
+<!--            <tr ng-repeat = "obj in data track by $index">-->
+<!--                            <td>{{ row.ordid }}</td>-->
+                            <td>{{ row.english }}</td>
+                            <td>{{ row.wordtype }}</td>
+                            <td>{{ row.definition }}</td>
+                            <td>{{ row.swedish }}</td>
+<!--                        </tr>-->
+	</tr>
+	</tbody>
+</table>
+</div>
+<div ng-show="isLoading" class="loading-indicator"></div>
+
+</div>  
+
+
+
+    
+    
+    
+</div>
+<!--<br><br><br><br><br><br><br><br>-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <!--
 <div class="wrapper-with-margin">
     <div id="owl-demo" class="owl-carousel">
